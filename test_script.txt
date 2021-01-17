@@ -15,7 +15,7 @@ bedtools getfasta -fi /fs/scratch/PAS1475/wtsa/ecoli/genome/GCF_000005845.2_ASM5
 
 awk '(NR)%2==0 {getline this<"tmp.coverage.txt";print this} 1' tmp.fasta | head -n -3 > out.tesa
 
-./wtsa -i /fs/scratch/PAS1475/wtsa/ecoli/GSE111093/mace_out/out.tesa 
+./tesa -i /fs/scratch/PAS1475/wtsa/ecoli/GSE111093/mace_out/out.tesa 
 
 
 

@@ -35,37 +35,39 @@ struct fibheap_el;
 /*
  * global heap operations
  */
-struct fibheap {
-	int	(*fh_cmp_fnct)(void *, void *);
-	int	fh_n;
-	int	fh_Dl;
-	struct	fibheap_el **fh_cons;
-	struct	fibheap_el *fh_min;
-	struct	fibheap_el *fh_root;
-	void	*fh_neginf;
-	int	fh_keys		: 1;
+struct fibheap
+{
+	int (*fh_cmp_fnct)(void *, void *);
+	int fh_n;
+	int fh_Dl;
+	struct fibheap_el **fh_cons;
+	struct fibheap_el *fh_min;
+	struct fibheap_el *fh_root;
+	void *fh_neginf;
+	int fh_keys : 1;
 #ifdef FH_STATS
-	int	fh_maxn;
-	int	fh_ninserts;
-	int	fh_nextracts;
+	int fh_maxn;
+	int fh_ninserts;
+	int fh_nextracts;
 #endif
 };
 
 /*
  * specific node operations
  */
-struct fibheap_el {
-	int	fhe_degree;
-	int	fhe_mark;
-	struct	fibheap_el *fhe_p;
-	struct	fibheap_el *fhe_child;
-	struct	fibheap_el *fhe_left;
-	struct	fibheap_el *fhe_right;
-	int	fhe_key;
-	void	*fhe_data;
+struct fibheap_el
+{
+	int fhe_degree;
+	int fhe_mark;
+	struct fibheap_el *fhe_p;
+	struct fibheap_el *fhe_child;
+	struct fibheap_el *fhe_left;
+	struct fibheap_el *fhe_right;
+	int fhe_key;
+	void *fhe_data;
 };
 
-#define	fhe_destroy(x)	free((x))
+#define fhe_destroy(x) free((x))
 
 /*
  * general functions

@@ -1,0 +1,7 @@
+./submit_tesa_preprocess.sh GSE54901_mace_list.txt
+./submit_tesa_preprocess.sh GSE111093_mace_list.txt  
+./submit_tesa_preprocess.sh GSE143856_mace_list.txt  
+./submit_tesa_preprocess.sh GSE158683_mace_list.txt    
+./submit_tesa_preprocess.sh GSE64847_mace_list.txt  
+./submit_tesa_preprocess.sh GSE65643_mace_list.txt  
+./submit_tesa_preprocess.sh GSE88981_mace_list.txt

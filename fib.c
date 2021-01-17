@@ -32,17 +32,18 @@
  *
  */
 
-#include "struct.h" 
+#include "struct.h"
 
-#define swap(type, a, b)		\
-		do {			\
-			type c;		\
-			c = a;		\
-			a = b;		\
-			b = c;		\
-		} while (0)		\
+#define swap(type, a, b) \
+	do                     \
+	{                      \
+		type c;              \
+		c = a;               \
+		a = b;               \
+		b = c;               \
+	} while (0)
 
-#define INT_BITS        (sizeof(int) * 8)
+#define INT_BITS (sizeof(int) * 8)
 
 /* Prototypes */
 static void fh_initheap(struct fibheap *);
@@ -50,16 +51,16 @@ static void fh_insertrootlist(struct fibheap *, struct fibheap_el *);
 static void fh_removerootlist(struct fibheap *, struct fibheap_el *);
 static void fh_consolidate(struct fibheap *);
 static void fh_heaplink(struct fibheap *h, struct fibheap_el *y,
-            struct fibheap_el *x);
+												struct fibheap_el *x);
 static void fh_cut(struct fibheap *, struct fibheap_el *, struct fibheap_el *);
 static void fh_cascading_cut(struct fibheap *, struct fibheap_el *);
 static struct fibheap_el *fh_extractminel(struct fibheap *);
 static void fh_checkcons(struct fibheap *h);
 static void fh_destroyheap(struct fibheap *h);
 static int fh_compare(struct fibheap *h, struct fibheap_el *a,
-            struct fibheap_el *b);
+											struct fibheap_el *b);
 static int fh_comparedata(struct fibheap *h, int key, void *data,
-            struct fibheap_el *b);
+													struct fibheap_el *b);
 static void fh_insertel(struct fibheap *h, struct fibheap_el *x);
 static void fh_deleteel(struct fibheap *h, struct fibheap_el *x);
 
@@ -82,12 +83,15 @@ static int ceillog2(unsigned int a)
 	oa = a;
 	b = INT_BITS / 2;
 	i = 0;
-	while (b) {
+	while (b)
+	{
 		i = (i << 1);
-		if (a >= (1 << b)) {
+		if (a >= (1 << b))
+		{
 			a /= (1 << b);
 			i = i | 1;
-		} else
+		}
+		else
 			a &= (1 << b) - 1;
 		b /= 2;
 	}
@@ -113,7 +117,8 @@ fh_deleteel(struct fibheap *h, struct fibheap_el *x)
 		fh_replacedata(h, x, h->fh_neginf);
 	else
 		fh_replacekey(h, x, INT_MIN);
-	if (fh_extractminel(h) != x) {
+	if (fh_extractminel(h) != x)
+	{
 		/*
 		 * XXX - This should never happen as fh_replace should set it
 		 * to min.
@@ -188,7 +193,7 @@ voidcmp
 fh_setcmp(struct fibheap *h, voidcmp fnct)
 {
 	voidcmp oldfnct;
-	
+
 	oldfnct = h->fh_cmp_fnct;
 	h->fh_cmp_fnct = fnct;
 
@@ -211,12 +216,16 @@ fh_union(struct fibheap *ha, struct fibheap *hb)
 {
 	struct fibheap_el *x;
 
-	if (ha->fh_root == NULL || hb->fh_root == NULL) {
+	if (ha->fh_root == NULL || hb->fh_root == NULL)
+	{
 		/* either one or both are empty */
-		if (ha->fh_root == NULL) {
+		if (ha->fh_root == NULL)
+		{
 			fh_destroyheap(ha);
 			return hb;
-		} else {
+		}
+		else
+		{
 			fh_destroyheap(hb);
 			return ha;
 		}
@@ -239,8 +248,7 @@ fh_union(struct fibheap *ha, struct fibheap *hb)
 	return ha;
 }
 
-void
-fh_deleteheap(struct fibheap *h)
+void fh_deleteheap(struct fibheap *h)
 {
 	/*
 	 * We could do this even faster by walking each binomial tree, but
@@ -272,16 +280,14 @@ fh_insertkey(struct fibheap *h, int key, void *data)
 	return x;
 }
 
-int
-fh_minkey(struct fibheap *h)
+int fh_minkey(struct fibheap *h)
 {
 	if (h->fh_min == NULL)
 		return INT_MIN;
 	return h->fh_min->fhe_key;
 }
 
-int
-fh_replacekey(struct fibheap *h, struct fibheap_el *x, int key)
+int fh_replacekey(struct fibheap *h, struct fibheap_el *x, int key)
 {
 	int ret;
 
@@ -306,7 +312,8 @@ fh_replacekeydata(struct fibheap *h, struct fibheap_el *x, int key, void *data)
 	 * we can increase a key by deleting and reinserting, that
 	 * requires O(lgn) time.
 	 */
-	if ((r = fh_comparedata(h, key, data, x)) > 0) {
+	if ((r = fh_comparedata(h, key, data, x)) > 0)
+	{
 		/* XXX - bad code! */
 		abort();
 		fh_deleteel(h, x);
@@ -331,7 +338,8 @@ fh_replacekeydata(struct fibheap *h, struct fibheap_el *x, int key, void *data)
 	if (h->fh_keys && okey == key)
 		return odata;
 
-	if (y != NULL && fh_compare(h, x, y) <= 0) {
+	if (y != NULL && fh_compare(h, x, y) <= 0)
+	{
 		fh_cut(h, x, y);
 		fh_cascading_cut(h, y);
 	}
@@ -386,13 +394,13 @@ fh_extractmin(struct fibheap *h)
 
 	ret = NULL;
 
-	if (h->fh_min != NULL) {
+	if (h->fh_min != NULL)
+	{
 		z = fh_extractminel(h);
 		ret = z->fhe_data;
 #ifndef NO_FREE
 		fhe_destroy(z);
 #endif
-
 	}
 
 	return ret;
@@ -423,20 +431,17 @@ fh_delete(struct fibheap *h, struct fibheap_el *x)
  * Statistics Functions
  */
 #ifdef FH_STATS
-int
-fh_maxn(struct fibheap *h)
+int fh_maxn(struct fibheap *h)
 {
 	return h->fh_maxn;
 }
 
-int
-fh_ninserts(struct fibheap *h)
+int fh_ninserts(struct fibheap *h)
 {
 	return h->fh_ninserts;
 }
 
-int
-fh_nextracts(struct fibheap *h)
+int fh_nextracts(struct fibheap *h)
 {
 	return h->fh_nextracts;
 }
@@ -456,7 +461,8 @@ fh_extractminel(struct fibheap *h)
 	orig = NULL;
 	/* put all the children on the root list */
 	/* for true consistancy, we should use fhe_remove */
-	for(x = ret->fhe_child; x != orig && x != NULL;) {
+	for (x = ret->fhe_child; x != orig && x != NULL;)
+	{
 		if (orig == NULL)
 			orig = x;
 		y = x->fhe_right;
@@ -471,7 +477,8 @@ fh_extractminel(struct fibheap *h)
 	/* if we aren't empty, consolidate the heap */
 	if (h->fh_n == 0)
 		h->fh_min = NULL;
-	else {
+	else
+	{
 		h->fh_min = ret->fhe_right;
 		fh_consolidate(h);
 	}
@@ -486,7 +493,8 @@ fh_extractminel(struct fibheap *h)
 static void
 fh_insertrootlist(struct fibheap *h, struct fibheap_el *x)
 {
-	if (h->fh_root == NULL) {
+	if (h->fh_root == NULL)
+	{
 		h->fh_root = x;
 		x->fhe_left = x;
 		x->fhe_right = x;
@@ -525,12 +533,14 @@ fh_consolidate(struct fibheap *h)
 	for (i = 0; i < D; i++)
 		a[i] = NULL;
 
-	while ((w = h->fh_root) != NULL) {
+	while ((w = h->fh_root) != NULL)
+	{
 		x = w;
 		fh_removerootlist(h, w);
 		d = x->fhe_degree;
 		/* XXX - assert that d < D */
-		while(a[d] != NULL) {
+		while (a[d] != NULL)
+		{
 			y = a[d];
 			if (fh_compare(h, x, y) > 0)
 				swap(struct fibheap_el *, x, y);
@@ -542,10 +552,11 @@ fh_consolidate(struct fibheap *h)
 	}
 	h->fh_min = NULL;
 	for (i = 0; i < D; i++)
-		if (a[i] != NULL) {
+		if (a[i] != NULL)
+		{
 			fh_insertrootlist(h, a[i]);
 			if (h->fh_min == NULL || fh_compare(h, a[i],
-			    h->fh_min) < 0)
+																					h->fh_min) < 0)
 				h->fh_min = a[i];
 		}
 }
@@ -578,11 +589,15 @@ fh_cascading_cut(struct fibheap *h, struct fibheap_el *y)
 {
 	struct fibheap_el *z;
 
-	while ((z = y->fhe_p) != NULL) {
-		if (y->fhe_mark == 0) {
+	while ((z = y->fhe_p) != NULL)
+	{
+		if (y->fhe_mark == 0)
+		{
 			y->fhe_mark = 1;
 			return;
-		} else {
+		}
+		else
+		{
 			fh_cut(h, y, z);
 			y = z;
 		}
@@ -620,12 +635,15 @@ fhe_initelem(struct fibheap_el *e)
 static void
 fhe_insertafter(struct fibheap_el *a, struct fibheap_el *b)
 {
-	if (a == a->fhe_right) {
+	if (a == a->fhe_right)
+	{
 		a->fhe_right = b;
 		a->fhe_left = b;
 		b->fhe_right = a;
 		b->fhe_left = a;
-	} else {
+	}
+	else
+	{
 		b->fhe_right = a->fhe_right;
 		a->fhe_right->fhe_left = b;
 		a->fhe_right = b;
@@ -669,13 +687,14 @@ fh_checkcons(struct fibheap *h)
 	int oDl;
 
 	/* make sure we have enough memory allocated to "reorganize" */
-	if (h->fh_Dl == -1 || h->fh_n > (1 << h->fh_Dl)) {
+	if (h->fh_Dl == -1 || h->fh_n > (1 << h->fh_Dl))
+	{
 		oDl = h->fh_Dl;
 		if ((h->fh_Dl = ceillog2(h->fh_n) + 1) < 8)
 			h->fh_Dl = 8;
 		if (oDl != h->fh_Dl)
 			h->fh_cons = (struct fibheap_el **)realloc(h->fh_cons,
-			    sizeof *h->fh_cons * (h->fh_Dl + 1));
+																								 sizeof *h->fh_cons * (h->fh_Dl + 1));
 		if (h->fh_cons == NULL)
 			abort();
 	}
@@ -684,13 +703,15 @@ fh_checkcons(struct fibheap *h)
 static int
 fh_compare(struct fibheap *h, struct fibheap_el *a, struct fibheap_el *b)
 {
-	if (h->fh_keys) {
+	if (h->fh_keys)
+	{
 		if (a->fhe_key < b->fhe_key)
 			return -1;
 		if (a->fhe_key == b->fhe_key)
 			return 0;
 		return 1;
-	} else
+	}
+	else
 		return h->fh_cmp_fnct(a->fhe_data, b->fhe_data);
 }
 
@@ -711,7 +732,7 @@ fh_insertel(struct fibheap *h, struct fibheap_el *x)
 	fh_insertrootlist(h, x);
 
 	if (h->fh_min == NULL || (h->fh_keys ? x->fhe_key < h->fh_min->fhe_key
-	    : h->fh_cmp_fnct(x->fhe_data, h->fh_min->fhe_data) < 0))
+																			 : h->fh_cmp_fnct(x->fhe_data, h->fh_min->fhe_data) < 0))
 		h->fh_min = x;
 
 	h->fh_n++;
@@ -721,5 +742,4 @@ fh_insertel(struct fibheap *h, struct fibheap_el *x)
 		h->fh_maxn = h->fh_n;
 	h->fh_ninserts++;
 #endif
-
 }

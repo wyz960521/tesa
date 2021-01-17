@@ -3,7 +3,6 @@
  * all the golbal functions are defined here
  */
 
-
 #include "struct.h"
 
 /**************************************************************************/
@@ -54,43 +53,44 @@ void errAbort(char *format, ...)
 long clock1000()
 /* A millisecond clock. */
 {
-    struct timeval tv;
-    static long origSec;
-    gettimeofday(&tv, NULL);
-    if (origSec == 0) origSec = tv.tv_sec;
-    return (tv.tv_sec-origSec)*1000 + tv.tv_usec / 1000;
+	struct timeval tv;
+	static long origSec;
+	gettimeofday(&tv, NULL);
+	if (origSec == 0)
+		origSec = tv.tv_sec;
+	return (tv.tv_sec - origSec) * 1000 + tv.tv_usec / 1000;
 }
 
 void uglyTime(char *label, ...)
 /* Print label and how long it's been since last call.  Call with 
  * a NULL label to initialize. */
 {
-    static long lastTime = 0;
-    long time = clock1000();
-    va_list args;
-    va_start(args, label);
-    if (label != NULL)
-    {
-        vfprintf(stdout, label, args);
-        fprintf(stdout, " [%.3f seconds elapsed]\n", (time - lastTime)/1000.);
-    }
-    lastTime = time;
-    va_end(args);
+	static long lastTime = 0;
+	long time = clock1000();
+	va_list args;
+	va_start(args, label);
+	if (label != NULL)
+	{
+		vfprintf(stdout, label, args);
+		fprintf(stdout, " [%.3f seconds elapsed]\n", (time - lastTime) / 1000.);
+	}
+	lastTime = time;
+	va_end(args);
 }
 
-void* xmalloc ( int size )
+void *xmalloc(int size)
 /* Wrapper for standard mallc */
 {
-	register void* value = malloc(size);
+	register void *value = malloc(size);
 	if (value == NULL)
 		errAbort("Memory exhausted (xmalloc)");
 	return value;
 }
 
-void* xrealloc ( void* ptr, int size )
+void *xrealloc(void *ptr, int size)
 /* Wrapper for standard reallc */
 {
-	register void* value = realloc(ptr, size);
+	register void *value = realloc(ptr, size);
 	if (value == NULL)
 		errAbort("Memory exhausted (xrealloc)");
 	return value;
@@ -100,40 +100,40 @@ void* xrealloc ( void* ptr, int size )
 struct dyStack *dsNew(int size)
 /* Initialize the stack */
 {
-    int stackSize = (size+1) * sizeof(int);
-    struct dyStack *ds = malloc(stackSize);
-    dsClear(ds);
-    return ds;
+	int stackSize = (size + 1) * sizeof(int);
+	struct dyStack *ds = malloc(stackSize);
+	dsClear(ds);
+	return ds;
 }
 
 void dsPush(struct dyStack *ds, int element)
 /* Add element to the stack */
 {
-    ds->items[++ds->top] = element;
+	ds->items[++ds->top] = element;
 }
 
 void dsPrint(struct dyStack *ds)
 /* Print out the stack elements */
 {
-    int i;
-    printf("Stack contains %d elements\n", dsSize(ds));
-    for (i=0; i<dsSize(ds); i++)
-	    printf("%d ", ds->items[i]);
-    putchar('\n');
+	int i;
+	printf("Stack contains %d elements\n", dsSize(ds));
+	for (i = 0; i < dsSize(ds); i++)
+		printf("%d ", ds->items[i]);
+	putchar('\n');
 }
 
 bool isInStack(struct dyStack *ds, int element)
 /* Test whether an elemente is in stack */
 {
-    bool flag = FALSE;
-    int i;
-    for (i=0; i<dsSize(ds); i++)
-  	    if (ds->items[i]==element)
+	bool flag = FALSE;
+	int i;
+	for (i = 0; i < dsSize(ds); i++)
+		if (ds->items[i] == element)
 		{
-			flag = TRUE; 
+			flag = TRUE;
 			break;
 		}
-    return flag;
+	return flag;
 }
 
 int dsIntersect(struct dyStack *ds1, struct dyStack *ds2)
@@ -141,9 +141,10 @@ int dsIntersect(struct dyStack *ds1, struct dyStack *ds2)
 {
 	int cnt = 0;
 	int i;
-	
-	for (i=0; i<dsSize(ds1); i++)
-		if (isInStack(ds2, ds1->items[i])) cnt++;
+
+	for (i = 0; i < dsSize(ds1); i++)
+		if (isInStack(ds2, ds1->items[i]))
+			cnt++;
 
 	return cnt;
 }
@@ -165,16 +166,21 @@ FILE *mustOpen(const char *fileName, char *mode)
 /* Open a file or die */
 {
 	FILE *f;
-	if (sameString(fileName, "stdin")) return stdin;
-	if (sameString(fileName, "stdout")) return stdout;
+	if (sameString(fileName, "stdin"))
+		return stdin;
+	if (sameString(fileName, "stdout"))
+		return stdout;
 	if ((f = fopen(fileName, mode)) == NULL)
 	{
 		char *modeName = "";
 		if (mode)
 		{
-			if (mode[0] == 'r') modeName = " to read";
-			else if (mode[0] == 'w') modeName = " to write";
-			else if (mode[0] == 'a') modeName = " to append";
+			if (mode[0] == 'r')
+				modeName = " to read";
+			else if (mode[0] == 'w')
+				modeName = " to write";
+			else if (mode[0] == 'a')
+				modeName = " to append";
 		}
 		errAbort("Can't open %s%s: %s", fileName, modeName, strerror(errno));
 	}
@@ -184,32 +190,32 @@ FILE *mustOpen(const char *fileName, char *mode)
 /**************************************************************************/
 /* Matrix allocations (continuous and discrete 2d array) */
 
-discrete** alloc2d(int rr, int cc)
+discrete **alloc2d(int rr, int cc)
 {
-        discrete** result;
-        int i;
-        AllocArray(result, rr);
-        for (i = 0; i < rr; i++)
-                AllocArray(result[i], cc);
-        return result;
+	discrete **result;
+	int i;
+	AllocArray(result, rr);
+	for (i = 0; i < rr; i++)
+		AllocArray(result[i], cc);
+	return result;
 }
-continuous** alloc2dd(int rr, int cc)
+continuous **alloc2dd(int rr, int cc)
 {
-        continuous** result;
-        int i;
-        AllocArray(result, rr);
-        for (i = 0; i < rr; i++)
-                AllocArray(result[i], cc);
-        return result;
+	continuous **result;
+	int i;
+	AllocArray(result, rr);
+	for (i = 0; i < rr; i++)
+		AllocArray(result[i], cc);
+	return result;
 }
-char** alloc2c(int rr, int cc)
+char **alloc2c(int rr, int cc)
 {
-        char** result;
-        int i;
-        AllocArray(result, rr);
-        for (i = 0; i < rr; i++)
-                AllocArray(result[i], cc);
-        return result;
+	char **result;
+	int i;
+	AllocArray(result, rr);
+	for (i = 0; i < rr; i++)
+		AllocArray(result[i], cc);
+	return result;
 }
 
 /**************************************************************************/
