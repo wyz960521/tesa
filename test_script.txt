@@ -1,0 +1,54 @@
+
+###### stable
+
+cd /fs/scratch/PAS1475/wtsa/ecoli/GSE111093/mace_out
+
+sort -k5 yiaj_glc_mace_out.border_pair.bed | awk -vF=100 'BEGIN{ OFS="\t"; }{ len=$3-$2; diff=F-len; flank=int(diff/2); upflank=downflank=flank; if (diff%2==1) { downflank++; }; print $1, $2-upflank, $3+downflank; }' -  | awk '{print $0 "\t" $1":"$2"-"$3}'> out.bed
+
+bigWigMerge yiaj_glc_mace_Forward.bw yiaj_glc_mace_Reverse.bw out.bg
+
+bedtools complement -i out.bg -g /fs/scratch/PAS1475/wtsa/ecoli/genome/GCF_000005845.2_ASM584v2_genomic.fna.fai | bedtools genomecov -d -i stdin -g /fs/scratch/PAS1475/wtsa/ecoli/genome/GCF_000005845.2_ASM584v2_genomic.fna.fai | awk '{if($3>0) print $1"\t"$2-1"\t"$2"\t0"}' | sort -k1,1 -k2,2n out.bg - > peaks_gaps.bed
+
+bedtools intersect -a out.bed -b peaks_gaps.bed -wb | cut -f4,8 | awk '$1 != f1 {if(NR>1) print f2; f1=f2=s=""}{f1=$1; f2=f2 s $2; s=","}END { print f1 }' > tmp.coverage.txt
+
+bedtools getfasta -fi /fs/scratch/PAS1475/wtsa/ecoli/genome/GCF_000005845.2_ASM584v2_genomic.fna -bed out.bed  > tmp.fasta
+
+awk '(NR)%2==0 {getline this<"tmp.coverage.txt";print this} 1' tmp.fasta | head -n -3 > out.tesa
+
+./wtsa -i /fs/scratch/PAS1475/wtsa/ecoli/GSE111093/mace_out/out.tesa 
+
+
+
+####### Archive
+
+#!/bin/bash
+echo "1.bowtie2 mapping"
+module add gcc
+module add bowtie2
+module add samtools
+bowtie2 -p 8 -x /pylon5/ci4s87p/cankun/genome/Esche.fasta -f /pylon5/ci4s87p/cankun/fasta/$1.fasta -S /pylon5/ci4s87p/cankun/fasta/$1.sam
+echo "bam sorting"
+samtools view -@ 8 -Sb  /pylon5/ci4s87p/cankun/fasta/$1.sam  >  /pylon5/ci4s87p/cankun/fasta/$1.bam
+samtools sort -@ 8 -m 10G /pylon5/ci4s87p/cankun/fasta/$1.bam -o /pylon5/ci4s87p/cankun/fasta/$1.sorted.bam
+echo "bam indexing"
+samtools index /pylon5/ci4s87p/cankun/fasta/$1.sorted.bam 
+echo "bedgraph creating"
+#bedtools genomecov -ibam /pylon5/ci4s87p/cankun/fasta/$1.sorted.bam -bg > $1.bg
+
+######### Archive readme
+module load bedtools
+
+chmod +x preprocess.sh
+
+Download and extract hg38:
+http://hgdownload.soe.ucsc.edu/goldenPath/hg38/bigZips/hg38.fa.gz
+
+# Build tesa
+make clean && make
+
+# Get input data from HINT-ATAC peaks:
+
+./preprocess.sh MEP1_test.narrowPeak MEP1.bam hg38.fa out.txt
+
+# Run tesa
+./tesa -i out.txt
