@@ -44,9 +44,9 @@ L and U are low boundary and up boundary of scope of motif length separately. We
 
 You can run TESA with another option using base coverage signal according to the following instructions:
  
-1. Make sure both bedtools and bigWigMerge are ready.
+1. Make sure both Bedtools and BigWigMerge are ready.
 2. A peak file with BED format(for instance, [PREFIX].bed), two bigwig files named [PREFIX]_Forward.bw and [PREFIX]_Reverse.bw respectively and a reference file with FASTA format with its reference with FAI format are required. For instance, there is a toy run with test.bed, test_Forward.bw, test_Reverse.bw, sequence.fa and sequence.fa.fai as input. Additionally, you can generate reference using samtools.
-3. Run preprocessing script and generate output file *.tesa
+3. Run preprocessing script and generate output file *.tesa.
 ```console
 $ chmod +x preprocess.sh
 $ ./preprocess.sh [PEAK_PREFIX] [REFERENCE_FILE] [REFERENCE_INDEX_FILE] [OUTPUT_PREFIX]
@@ -55,7 +55,7 @@ For instance:
 ```console
 $ ./preprocess.sh TEST sequence.fa sequence.fa.fai TEST_out
 ```   
-5. Run TESA beyond new input with base coverage signal
+4. Run TESA beyond new input with base coverage signal.
 ```console
 $ ./tesa [OUTPUT_PREFIX].tesa
 ```
