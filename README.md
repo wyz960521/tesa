@@ -14,7 +14,6 @@ Certain parts of the code uses open-source data structure library codes, includi
 Commonly used parameters:
 
 -l : motif length [5, ]
-
      default: 14
      
 -L : minimum motif length
@@ -24,89 +23,68 @@ Commonly used parameters:
      default: 14
      
 -o : number of closures to report (used under a specific input length)
-
      default: 10
      
 -B : search reverse complement
-
      default: TRUE
      
 Advanced parameters:
 
 -n : top n closures under each length are used when L < U 
-
      default: 1
      
 -w : the weight of the two motif ends 
-
      default: 2
      
 -k : the minimum size of the initial motif seeds,
-
      default: 3
      
 -c : consistency level of the motif seeds (0.5-1.0]
-
      default: 1
      
 -s : the nunber of simulation times [5, ]
-
      default: 5
      
 -u : the threshold of two closures' similarity socre (0,1]
-
      default: 0.95
      
 -a : the upper limit of conservation level (N,10]
-
      default: 9
      
 -N : the lower limit of conservation level (0,a)
-
      default: 6
      
 -P : the flag of palindromic of TFBS
-
      default: FALSE
      
 -M : the flag of mirror of TFBS
-
      default: FALSE
      
 -G : the flag of global TF prediction
-
      default: FALSE
      
 -C : the flag of local TF prediction
-
      default: FALSE
      
 -E : the flag of expansion of closures base on the threshold 0.3-0.8
-
      default: FALSE
      
 -A : the flag of approximation of pvalue calculation
-
      default: FALSE
      
 -F : the flag of fast version of wtsa which just enhance two ends of motif
-
      default: FALSE
      
 -W : the flag of considering sequences weight
-
      default: FALSE
      
 -R : the range when we use [L,U]
-
      default: 1
      
 -e : the times of seed alignments enlargement [1,3]
-
      default: 3
      
 -b : the conserve level when search in background genome
-
      default: 0.95
      
 ## Installation
