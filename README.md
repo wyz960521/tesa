@@ -62,8 +62,13 @@ $ ./tesa [OUTPUT_PREFIX].tesa
 ## Parameter
 
 | Option  | Parameter | Description | Default |
+| Commonly used parameters |
 | ------------- | ------------- | ------------- | ------------- |
-| -l  | length  | motif length [5, ]  | Specify length of target motif length. In general, this value should be greater than 5. | 14 |
+| -l  | length  | motif length [5,l] | Specify length of target motif length. In general, this value should be greater than 5. | 14 |
+| -L  | motif length [L,U] | Specify minimum target motif length. This parameter only takes effect when l is not specified. | Not effective |
+| -U  | motif length [L,U] | Specify maximum target motif length. Must have a value greater than L. This parameter only takes effect when l is not specified. | Not effective |
+| -o  | number of closures  | Number of closures to report (used under a specific input length). Only effective when the value is greater than the total number of closures found by this tool. | Report 10 closures in default. |
+| -B  |  whether to search reverse complement | TRUE or FALSE. If it is set TRUE ture， the program will search both the forward complement and reverse complement. | TURE in default which means input sequence should be bidirectional. |
 
 
 Commonly used parameters:
