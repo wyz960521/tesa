@@ -63,7 +63,10 @@ $ ./tesa [OUTPUT_PREFIX].tesa
 
 | Option  | Parameter | Description | Default |
 | ------------- | ------------- | ------------- | ------------- |
+
 | Commonly used parameters |
+| ------------- |
+
 | -l  | length  | motif length [5,l] | Specify length of target motif length. In general, this value should be greater than 5. | 14 |
 | -L  | motif length [L,U] | Specify minimum target motif length. This parameter only takes effect when l is not specified. | Not effective |
 | -U  | motif length [L,U] | Specify maximum target motif length. Must have a value greater than L. This parameter only takes effect when l is not specified. | Not effective |
