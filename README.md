@@ -6,7 +6,7 @@ We introduce the TESA algorithm, which is a novel motif discovery algorithm desi
 
 Overall, we highlight the significance of TESA in improving motif discovery accuracy and precision by leveraging the higher resolution and precise localization offered by ChIP-exo data. The algorithm's weighted two-stage alignment procedure and incorporation of a "bookend" model contribute to its superior performance in identifying DNA binding patterns. The comparisons with other motif discovery algorithms and the availability of benchmark datasets further validate the effectiveness of TESA in genomic research.
 
-![image](https://github.com/wyz960521/tesa/edit/main/overview.png)
+![image](overview.png)
 
 ## How TESA works
 
