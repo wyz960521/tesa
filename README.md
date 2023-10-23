@@ -63,7 +63,6 @@ $ ./tesa [OUTPUT_PREFIX].tesa
 
 | Option  | Parameter | Description | Default |
 | ------------- | ------------- | ------------- | ------------- |
-
 | Commonly used parameters |
 | ------------- |
 
