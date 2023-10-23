@@ -1,5 +1,44 @@
 # TESA
 
+## Overview
+
+We introduce the TESA algorithm, which is a novel motif discovery algorithm designed for ChIP-exo data. ChIP-exo is a high-resolution DNA sequencing technique that improves the accuracy and precision of motif discovery compared to traditional ChIP-seq methods. TESA utilizes a weighted two-stage alignment procedure that takes into account positional sequencing coverage to allocate weights to sequence positions. This allows for the accurate localization of TF-DNA interaction sites and the assessment of closely located or overlapping binding occurrences. Experimental results demonstrate that TESA outperforms other motif discovery algorithms in terms of precision and the reconstruction of Position Weight Matrices (PWM) when applied to both prokaryotic and eukaryotic ChIP-exo datasets. The availability of the TESA source code and benchmark datasets further enhances its potential as a valuable tool in genomic research.
+
+Overall, we highlight the significance of TESA in improving motif discovery accuracy and precision by leveraging the higher resolution and precise localization offered by ChIP-exo data. The algorithm's weighted two-stage alignment procedure and incorporation of a "bookend" model contribute to its superior performance in identifying DNA binding patterns. The comparisons with other motif discovery algorithms and the availability of benchmark datasets further validate the effectiveness of TESA in genomic research.
+
+## How STREME works
+
+TESA incorporates a weighted two-stage alignment procedure and a "bookend" model to accurately identify DNA binding patterns. The algorithm consists of the following steps:
+
+### 1. Two-Stage Alignment. 
+
+TESA constructs a matrix 𝑀ℎ of dimensions 2𝑚 × 𝑛, where 𝑚 is the number of input sequences and 𝑛 is the length of each sequence. The matrix represents both the input sequences and their reverse complementary sequences. Each position in the matrix is assigned a normalized sequencing coverage. TESA allocates weights to pairs of segments, each of length 𝑙, between different sequences based on string similarity and sequencing coverage. The statistical significance of string similarity between segments is evaluated using the binomial distribution.
+
+### 2. Graph Construction
+
+After the two-stage alignment, TESA constructs a graph 𝐺 using the top-scoring positions from the alignment. The graph incorporates both the input sequences and their reverse complements, with each position connected by an edge.
+
+### 3. Motif Detection
+
+Cliques (complete subgraphs) are detected within the constructed graph using a heuristic algorithm. These cliques serve as potential motifs.
+
+### 4. "Bookend" model
+
+A specialized "bookend" method is deployed to optimize the length of the motifs by assessing the sequential overlaps between pairs of potential motifs.
+
+### 5. Motif Expansion
+
+In the final step, TESA expands the sets of motif instances identified in Step 4. The algorithm selects segments with elevated motif match scores and uses these instances to construct the motif Position Weight Matrix (PWM).
+
+## Sequence set
+
+The sequence set refers to the collection of DNA sequences that are used as input data for motif discovery algorithms. The sequence set is specifically derived from ChIP-exo (Chromatin Immunoprecipitation combined with Exonuclease treatment) data. The ChIP-exo data includes the reference genome file in FASTA format, a narrow peak file in BED format, and one or multiple sequencing coverage files in BigWig format. These files are processed and transformed into the TESA format, which combines the narrow peaks represented in FASTA format with normalized sequencing coverages. This sequence set is then used as input for the TESA algorithm to identify DNA binding motifs.
+
+## Motif statistical significance
+
+The statistical significance of motifs is assessed through a binomial distribution model. After identifying potential motifs using clique detection, TESA evaluates the co-occurrence of pairs of potential motifs using a binomial distribution test. This test calculates the probability that a pair of randomly selected instances from two potential motifs are within a certain distance. If the observed co-occurrence is deemed statistically significant (p-value < 0.05), TESA combines the potential motifs while maintaining their intersecting instances. This statistical significance assessment allows TESA to determine which potential motifs should be merged to form longer motifs or treated as distinct entities.
+
+The motif statistical significance analysis ensures that TESA accurately identifies motifs that are statistically enriched and distinguishes them from random occurrences. By employing the binomial distribution model, TESA provides a rigorous assessment of motif co-occurrence and optimizes the selection and combination of potential motifs to improve motif prediction accuracy. This statistical approach enhances the reliability and validity of motif discovery results in ChIP-exo data analysis.
 
 ## Usage
 
@@ -8,7 +47,6 @@ This software provides a tool capable of accurately extracting cis-regulatory mo
 Certain parts of the code uses open-source data structure library codes, including:
 - fib <http://resnet.uoregon.edu/~gurney_j/jmpc/fib.html>, copyright information in fib.c
 - Mark A. Weiss's data structure codes <http://www.cs.fiu.edu/~weiss/>
-
 
 ## Installation
 
