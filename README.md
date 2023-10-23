@@ -63,91 +63,31 @@ $ ./tesa [OUTPUT_PREFIX].tesa
 
 | Option  | Parameter | Description | Default |
 | ------------- | ------------- | ------------- | ------------- |
-| Commonly used parameters |
-| ------------- |
-
 | -l  | length  | motif length [5,l] | Specify length of target motif length. In general, this value should be greater than 5. | 14 |
 | -L  | motif length [L,U] | Specify minimum target motif length. This parameter only takes effect when l is not specified. | Not effective |
+| -R | range | The range when we use [L,U] | 1 in default |  
 | -U  | motif length [L,U] | Specify maximum target motif length. Must have a value greater than L. This parameter only takes effect when l is not specified. | Not effective |
 | -o  | number of closures  | Number of closures to report (used under a specific input length). Only effective when the value is greater than the total number of closures found by this tool. | Report 10 closures in default. |
-| -B  |  whether to search reverse complement | TRUE or FALSE. If it is set TRUE ture， the program will search both the forward complement and reverse complement. | TURE in default which means input sequence should be bidirectional. |
+| -n  | number of closures  | Top n closures under each length are used when L < U. Only effective when the value is greater than the total number of closures found by this tool. | Not effective. |
+| -B  |  reverse complement | TRUE or FALSE whether to search reverse complement. If it is set TRUE ture， the program will search both the forward complement and reverse complement. | TURE in default which means input sequence should be bidirectional. |
+| -w | weight | Should be set with a positive integer. The weight of the two motif ends | The defalut weight is 2. |
+| -k | motif seeds size | Should be set with a positive integer. The minimum size of the initial motif seeds. | It is strongly recommended not to set it smaller than the default value 3. |
+| -c | consistency ratio | The consistency level of the motif seeds. Should be set beween (0.5-1.0]. | A ratio with default 1. Must be strictly greater than 0.5. |
+| -s | simulation times | The nunber of simulation times when generating motif closures. A positive integer greater than or equal to 5.| 5 in default. Increasing this parameter will increase the runtime. |
+| -u | similarity socre | The threshold of two closures' similarity socre (0,1].| Default threshold is 0.95 |
+| -a | upper limit | The upper limit of conservation level (N,10]. | (9,10] in default |
+| -N | lower limit | The lower limit of conservation level (0,a).| (0,6] in default |
+| -P | palindromic | TRUE or FALSE, the flag of palindromic of TFBS. | FALSE in default |
+| -M | mirror | TRUE or FALSE, the flag of mirror of TFBS. | FALSE in default |     
+| -e | enlargement | The times of seed alignments enlargement. A positive integer between [1,3] | 3 in default |  
+| -b | background | The conserve level (0,1] when search in background genome. Only effective when background gene exists | 0.95 in default|  
+| -W | sequences weight | TRUE or FALSE, the flag of considering sequences weight. | FALSE in default |  
+| -A | approximation | TRUE or FALSE, the flag of approximation of pvalue calculation. | FALSE in default |  
+| -G | global | TRUE or FALSE, the flag of global TF prediction. | FALSE in default |  
+| -C | local | TRUE or FALSE, the flag of local TF prediction.  | FALSE in default |  
+| -E | expansion | TRUE or FALSE, the flag of expansion of closures base on the threshold 0.3-0.8. | FALSE in default |  
+| -F | fast | TRUE or FALSE, the flag of fast version of wtsa which just enhance two ends of motif | FALSE in default |  
 
-
-Commonly used parameters:
-
--l : motif length [5, ]
-     default: 14
-     
--L : minimum motif length
-     default: 14
-     
--U : maximum motif length
-     default: 14
-     
--o : number of closures to report (used under a specific input length)
-     default: 10
-     
--B : search reverse complement
-     default: TRUE
-     
-Advanced parameters:
-
--n : top n closures under each length are used when L < U 
-     default: 1
-     
--w : the weight of the two motif ends 
-     default: 2
-     
--k : the minimum size of the initial motif seeds,
-     default: 3
-     
--c : consistency level of the motif seeds (0.5-1.0]
-     default: 1
-     
--s : the nunber of simulation times [5, ]
-     default: 5
-     
--u : the threshold of two closures' similarity socre (0,1]
-     default: 0.95
-     
--a : the upper limit of conservation level (N,10]
-     default: 9
-     
--N : the lower limit of conservation level (0,a)
-     default: 6
-     
--P : the flag of palindromic of TFBS
-     default: FALSE
-     
--M : the flag of mirror of TFBS
-     default: FALSE
-     
--G : the flag of global TF prediction
-     default: FALSE
-     
--C : the flag of local TF prediction
-     default: FALSE
-     
--E : the flag of expansion of closures base on the threshold 0.3-0.8
-     default: FALSE
-     
--A : the flag of approximation of pvalue calculation
-     default: FALSE
-     
--F : the flag of fast version of wtsa which just enhance two ends of motif
-     default: FALSE
-     
--W : the flag of considering sequences weight
-     default: FALSE
-     
--R : the range when we use [L,U]
-     default: 1
-     
--e : the times of seed alignments enlargement [1,3]
-     default: 3
-     
--b : the conserve level when search in background genome
-     default: 0.95
      
 ## Contact
 
