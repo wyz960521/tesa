@@ -36,12 +36,6 @@ In the final step, TESA expands the sets of motif instances identified in Step 4
 
 The sequence set refers to the collection of DNA sequences that are used as input data for motif discovery algorithms. The sequence set is specifically derived from ChIP-exo data. The ChIP-exo data includes the reference genome file in FASTA format, a narrow peak file in BED format, and one or multiple sequencing coverage files in BigWig format. These files are processed and transformed into the TESA format, which combines the narrow peaks represented in FASTA format with normalized sequencing coverages. This sequence set is then used as input for the TESA algorithm to identify DNA binding motifs.
 
-## Motif statistical significance
-
-The statistical significance of motifs is assessed through a binomial distribution model. After identifying potential motifs using clique detection, TESA evaluates the co-occurrence of pairs of potential motifs using a binomial distribution test. This test calculates the probability that a pair of randomly selected instances from two potential motifs are within a certain distance. If the observed co-occurrence is deemed statistically significant (p-value < 0.05), TESA combines the potential motifs while maintaining their intersecting instances. This statistical significance assessment allows TESA to determine which potential motifs should be merged to form longer motifs or treated as distinct entities.
-
-The motif statistical significance analysis ensures that TESA accurately identifies motifs that are statistically enriched and distinguishes them from random occurrences. By employing the binomial distribution model, TESA provides a rigorous assessment of motif co-occurrence and optimizes the selection and combination of potential motifs to improve motif prediction accuracy. This statistical approach enhances the reliability and validity of motif discovery results in ChIP-exo data analysis.
-
 ## Installation
 
 Enter the folder "tesa" and type "make" then the compiled codes are within the same directory as the source.
@@ -56,13 +50,13 @@ To see help and look at all available options.
 $ ./tesa -h (./tesa)
 ```
 
-Take a look at `example` (fasta file) first. And try to run tesa under a specific length, now we can handle motif length more than or equal to 5 (controlled in write_block.c line 256).
+Take a look at `example` (fasta file) first. And try to run tesa under a specific length, now we can handle length of segments during two-stage alignment (potential motifs) more than or equal to 5 (controlled in write_block.c line 256).
 
 ```console
 $ ./tesa -i example -l 14
 ```
 
-For each input file under a specific length l, our program generates a output file, namely, '.closures'file. In '.closures' file, it provides all the closures, representing motif profiles, in the increasing order of their pvalues.
+For each input file under a specific length l, our program generates a output file, namely, '.closures' file. In '.closures' file, it provides all the closures, representing motif profiles, in the increasing order of their pvalues.
 
 Then try to run tesa recognizing the correct length in the scope [L,U] by our program automatically
 
@@ -70,13 +64,13 @@ Then try to run tesa recognizing the correct length in the scope [L,U] by our pr
 $ ./tesa -i example -L 14 -U 16
 ```
 
-L and U are low boundary and up boundary of scope of motif length separately. We use this pair of parameters when we do not know the accurate length in advance. We sort the top n closures under each specific length in the increasing order of their pvalues and save the top o clousres in the ".closures" file. Especially, when the input value of L equals to U, it is equivalent to finding motifs in a specific length. '$ ./tesa -i example -L 14 -U 14' is equivalent to '$ ./tesa -i example -l 14'.
+L and U are low boundary and up boundary of scope of length of potential motifs separately. We use this pair of parameters when we do not know the accurate length in advance. We sort the top n closures under each specific length in the increasing order of their pvalues and save the top o clousres in the ".closures" file. Especially, when the input value of L equals to U, it is equivalent to finding motifs in a specific length. '$ ./tesa -i example -L 14 -U 14' is equivalent to '$ ./tesa -i example -l 14'.
 
-## Running TESA using an input file with base coverage signal
+## Running TESA using an input file with sequencing coverage
 
 You can run TESA with another option using base coverage signal according to the following instructions:
  
-1. Make sure both Bedtools and BigWigMerge are ready.
+1. Make sure both ```Bedtools``` and ```BigWigMerge``` are ready.
 2. A peak file with BED format(for instance, [PREFIX].bed), two bigwig files named [PREFIX]_Forward.bw and [PREFIX]_Reverse.bw respectively and a reference file with FASTA format with its reference with FAI format are required. For instance, there is a toy run with test.bed, test_Forward.bw, test_Reverse.bw, sequence.fa and sequence.fa.fai as input. Additionally, you can generate reference using samtools.
 3. Run preprocessing script and generate output file *.tesa.
 ```console
@@ -91,14 +85,14 @@ $ ./preprocess.sh TEST sequence.fa sequence.fa.fai TEST_out
 ```console
 $ ./tesa [OUTPUT_PREFIX].tesa
 ```
-## Parameter
+## Parameters
 
 | Option  | Parameter | Description | Default |
 | ------------- | ------------- | ------------- | ------------- |
-| -l  | length  | motif length [5,l] | Specify length of target motif length. In general, this value should be greater than 5. | 14 |
-| -L  | motif length [L,U] | Specify minimum target motif length. This parameter only takes effect when l is not specified. | Not effective |
+| -l  | length  | length of potential motifs [5,l] | Specify length of potential motifs. In general, this value should be greater than 5. | 14 |
+| -L  | length of potential motifs [L,U] | Specify minimum length of potential motifs. This parameter only takes effect when l is not specified. | Not effective |
 | -R | range | The range when we use [L,U] | 1 in default |  
-| -U  | motif length [L,U] | Specify maximum target motif length. Must have a value greater than L. This parameter only takes effect when l is not specified. | Not effective |
+| -U  | length of potential motifs [L,U] | Specify maximum length of potential motifs. Must have a value greater than L. This parameter only takes effect when l is not specified. | Not effective |
 | -o  | number of closures  | Number of closures to report (used under a specific input length). Only effective when the value is greater than the total number of closures found by this tool. | Report 10 closures in default. |
 | -n  | number of closures  | Top n closures under each length are used when L < U. Only effective when the value is greater than the total number of closures found by this tool. | Not effective. |
 | -B  |  reverse complement | TRUE or FALSE whether to search reverse complement. If it is set TRUE ture， the program will search both the forward complement and reverse complement. | TURE in default which means input sequence should be bidirectional. |
