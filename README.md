@@ -98,7 +98,7 @@ $ ./tesa [OUTPUT_PREFIX].tesa
 
 | Option  | Parameter | Description | Default |
 | ------------- | ------------- | ------------- | ------------- |
-| -l  | length of segments [5,l] | Specify length of segments during two-stage alignment. In general, this value should be greater than 5. | `14` in default.|
+| -l  | length | Specify length of segments during two-stage alignment. In general, this value should be greater than 5. | `14` in default.|
 | -L  | lower length | Specify minimum length of segments during two-stage alignment. This parameter only takes effect when `l` is not specified. | Not effective. |
 | -U  | upper length | Specify maximum length of segments during two-stage alignment. Must have a value greater than `L`. This parameter only takes effect when `l` is not specified. | Not effective. |
 | -R | range | The range when we use `[L,U]`. | `1` in default. |  
