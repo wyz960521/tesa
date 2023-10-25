@@ -30,7 +30,7 @@ A specialized "bookend" method is deployed to optimize the length of the motifs 
 
 ### 5. Motif Expansion
 
-In the final step, TESA expands the sets of motif instances identified in Step 4. The algorithm selects segments with elevated motif match scores and uses these instances to construct the motif Position Weight Matrix (PWM).
+In the final step, TESA expands the sets of motif instances identified in Step 4. The algorithm selects segments with elevated motif match scores and uses these instances to construct the motif PWM.
 
 ## Sequence set
 
