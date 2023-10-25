@@ -13,15 +13,15 @@ Overall, we highlight the significance of TESA in improving motif discovery accu
 
 TESA incorporates a weighted two-stage alignment procedure and a "bookend" model to accurately identify DNA binding patterns. The algorithm consists of the following steps:
 
-### 1. Two-Stage Alignment
+### 1. Two-Stage lignment
 
 TESA constructs a matrix with dimensions 2𝑚 × 𝑛, where 𝑚 is the number of input sequences and 𝑛 is the length of each sequence. The matrix represents both the input sequences and their reverse complementary sequences. Each position in the matrix is assigned a normalized sequencing coverage. TESA allocates weights to pairs of segments, each of length 𝑙, between different sequences based on string similarity and sequencing coverage. The statistical significance of string similarity between segments is evaluated using the binomial distribution.
 
-### 2. Graph Construction
+### 2. Graph construction
 
 After the two-stage alignment, TESA constructs a graph 𝐺 using the top-scoring positions from the alignment. The graph incorporates both the input sequences and their reverse complements, with each position connected by an edge.
 
-### 3. Motif Detection
+### 3. Motif setection
 
 Cliques (complete subgraphs) are detected within the constructed graph using a heuristic algorithm. These cliques serve as potential motifs.
 
@@ -29,7 +29,7 @@ Cliques (complete subgraphs) are detected within the constructed graph using a h
 
 A specialized "bookend" method is deployed to optimize the length of the motifs by assessing the sequential overlaps between pairs of potential motifs.
 
-### 5. Motif Expansion
+### 5. Motif expansion
 
 In the final step, TESA expands the sets of motif instances identified in Step 4. The algorithm selects segments with elevated motif match scores and uses these instances to construct the motif PWM.
 
