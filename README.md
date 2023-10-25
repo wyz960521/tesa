@@ -44,7 +44,7 @@ The motif statistical significance analysis ensures that TESA accurately identif
 
 ## Installation
 
-enter the folder "tesa" and type "make" then the compiled codes are within the same directory as the source.
+Enter the folder "tesa" and type "make" then the compiled codes are within the same directory as the source.
 
 ## Inputs and outputs
 
