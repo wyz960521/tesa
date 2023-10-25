@@ -117,7 +117,7 @@ $ ./tesa [OUTPUT_PREFIX].tesa
 | -e | `enlargement` | The times of seed alignments enlargement. A positive integer between `[1,3]`. | The program run `3` times for seed alignments enlargement in default. |  
 | -b | `background` | The conserve level `(0,1]` when search in background genome. Only effective when background gene exists. | If background gene exists, the level uses `0.95` in default.|  
 | -W | `sequences weight` | `TRUE` or `FALSE`, the flag of considering sequences weight. | The flag is set as `FALSE` in default. |  
-| -A | `approximation` | `TRUE` or `FALSE`, the flag of approximation of *P*-value calculation. | `FALSE` in default. |  
+| -A | `approximation` | `TRUE` or `FALSE`, the flag of approximation of *P*-value calculation. | The flag of approximation of *P*-value calculation is `FALSE` in default. |  
 | -G | `global` | `TRUE` or `FALSE`, the flag of global TF prediction. | Global TF prediction flag is `FALSE` in default. |  
 | -C | `local` | `TRUE` or `FALSE`, the flag of local TF prediction.  | Local TF prediction flag is `FALSE` in default. |  
 | -E | `expansion` | `TRUE` or `FALSE`, the flag of expansion of closures base on the threshold `[0.3,0.8]`. | No expansion of closures with `FALSE` in default. |  
