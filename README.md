@@ -56,7 +56,7 @@ Take a look at `example` (FASTA file) first. Then, you can run `tesa` with a spe
 ```console
 $ ./tesa -i example -l 14
 ```
-For each input file with a specific length parameter `l`, the program will generate an output file, namely, `'.closures'` file. This file contains all the closures, which represent the motif profiles, arranged in increasing order of their p-values.
+For each input file with a specific length parameter `l`, the program will generate an output file, namely, `'.closures'` file. This file contains all the closures, which represent the instances of identified motifs.
 
 Additionally, you can run `tesa` recognizing the correct length in the scope `[L,U]` by our program automatically.
 
@@ -64,19 +64,19 @@ Additionally, you can run `tesa` recognizing the correct length in the scope `[L
 $ ./tesa -i example -L 14 -U 16
 ```
 
-`L` and `U` are lower and upper length of segments during two-stage alignment separately. This is useful when the accurate length is not known in advance. We sort the top `n` closures under each specific length in the increasing order of their p-values and save the top `o` closures in the `'.closures'` file. Especially, when the input value of `L` equals to `U`, it is equivalent to finding motifs in a specific length. For example, './tesa -i example -L 14 -U 14' is equivalent to './tesa -i example -l 14'.
+`L` and `U` are lower and upper length of segments during two-stage alignment separately. This is useful when the accurate length is not known in advance. We sort the top `n` closures under each specific length in the increasing order of their P-values and save the top `o` closures in the `'.closures'` file. Especially, when the input value of `L` equals to `U`, it is equivalent to finding motifs in a specific length. For example, `'./tesa -i example -L 14 -U 14'` is equivalent to `'./tesa -i example -l 14'`.
 
 ## Running TESA using an input file with sequencing coverage
 
 You can run TESA with another option using base coverage signal according to the following instructions:
  
-1. Make sure both ```Bedtools``` and ```BigWigMerge``` are ready. 
+1. Make sure both ```BEDTools``` and ```BigWigMerge``` are ready. 
    
-   Bedtools: https://bedtools.readthedocs.io/en/latest
+   BEDTools: https://BEDTools.readthedocs.io/en/latest
    
    BigWigMerge: https://anaconda.org/bioconda/ucsc-bigwigmerge
 
-3. A peak file with `BED` format(for instance, `[PREFIX].bed`), two bigwig files named `[PREFIX]_Forward.bw` and `[PREFIX]_Reverse.bw` respectively and a reference file with `FASTA` format with its reference with `FAI` format are required. For instance, there is a toy run with test.bed, test_Forward.bw, test_Reverse.bw, sequence.fa and sequence.fa.fai as input. Additionally, you can generate reference using `samtools`.
+3. A peak file with `BED` format (for instance, `[PREFIX].bed`), two bigwig files named `[PREFIX]_Forward.bw` and `[PREFIX]_Reverse.bw` respectively and a reference file with `FASTA` format with its index file of `FASTA.FAI` format are required. For instance, there is a toy run with `test.bed`, `test_Forward.bw`, `test_Reverse.bw`, `sequence.fa` and `sequence.fa.fai` as input. Additionally, you can generate reference using `SAMTools`.
 4. Run preprocessing script and generate output file `*.tesa`.
 ```console
 $ chmod +x preprocess.sh
