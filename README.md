@@ -68,7 +68,7 @@ $ ./tesa -i example -L 14 -U 16
 
 ## Running TESA using an input file with sequencing coverage
 
-You can run TESA with another option using base coverage signal according to the following instructions:
+You can run TESA with another option using sequencing coverage according to the following instructions:
  
 1. Make sure both ```BEDTools``` and ```BigWigMerge``` are ready. 
    
@@ -89,7 +89,7 @@ For instance:
 ```console
 $ ./preprocess.sh TEST sequence.fa sequence.fa.fai TEST_out
 ```   
-4. Run TESA beyond new input with base coverage signal.
+4. Run TESA beyond new input with sequencing coverage.
 ```console
 $ ./tesa [OUTPUT_PREFIX].tesa
 ```
