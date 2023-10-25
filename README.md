@@ -8,6 +8,7 @@ Overall, we highlight the significance of TESA in improving motif discovery accu
 
 ![image](overview.png)
 
+
 ## How TESA works
 
 TESA incorporates a weighted two-stage alignment procedure and a "bookend" model to accurately identify DNA binding patterns. The algorithm consists of the following steps:
