@@ -64,7 +64,7 @@ Additionally, you can run `tesa` recognizing the correct length in the scope `[L
 $ ./tesa -i example -L 14 -U 16
 ```
 
-`L` and `U` are lower and upper length of segments during two-stage alignment separately. This is useful when the accurate length is not known in advance. We sort the top `n` closures under each specific length in the increasing order of their P-values and save the top `o` closures in the `'.closures'` file. Especially, when the input value of `L` equals to `U`, it is equivalent to finding motifs in a specific length. For example, `'./tesa -i example -L 14 -U 14'` is equivalent to `'./tesa -i example -l 14'`.
+`L` and `U` are lower and upper length of segments during two-stage alignment separately. This is useful when the accurate length is not known in advance. We sort the top `n` closures under each specific length in the increasing order of their *P*-values and save the top `o` closures in the `'.closures'` file. Especially, when the input value of `L` equals to `U`, it is equivalent to finding motifs in a specific length. For example, `'./tesa -i example -L 14 -U 14'` is equivalent to `'./tesa -i example -l 14'`.
 
 ## Running TESA using an input file with sequencing coverage
 
@@ -98,34 +98,34 @@ $ ./tesa [OUTPUT_PREFIX].tesa
 
 | Option  | Parameter | Description | Default |
 | ------------- | ------------- | ------------- | ------------- |
-| -l  | length | Specify length of segments during two-stage alignment. In general, this value should be greater than 5. | `14` in default.|
-| -L  | minlength | Specify minimum length of segments during two-stage alignment. This parameter only takes effect when `l` is not specified. | Not effective. |
-| -U  | maxlength | Specify maximum length of segments during two-stage alignment. Must have a value greater than `L`. This parameter only takes effect when `l` is not specified. | Not effective. |
-| -R | range | The range when we use `[L,U]`. | `1` in default. |  
-| -o | output closures  | Number of closures to report (used under a specific input length). Only effective when the value is greater than the total number of closures found by this tool. | Report `10` closures in default. |
-| -n  | number of closures  | Top `n` closures under each length are used when `L < U`. Only effective when the value is greater than the total number of closures found by this tool. | Not effective. |
-| -B  |  reverse complement | `TRUE` or `FALSE` whether to search reverse complement. If it is set `TRUE`，the program will search both the forward complement and reverse complement. | `TRUE` in default which means input sequence should be bidirectional. |
-| -w | weight | Should be set with a positive integer. The weight of the two motif ends. | The default weight is `2`. |
-| -k | motif seeds size | Should be set with a positive integer. The minimum size of the initial motif seeds. | It is strongly recommended not to set it smaller than the default value `3`. |
-| -c | consistency ratio | The consistency level of the motif seeds. Should be set between `(0.5-1.0]`. | A ratio with default `1`. Must be strictly greater than `0.5`. |
-| -s | simulation times | The number of simulation times when generating motif closures. A positive integer greater than or equal to `5`.| `5` in default. Increasing this parameter will increase the run time. |
-| -u | similarity score | The threshold of two closures' similarity score `(0,1]`.| Default threshold is `0.95`. |
-| -a | upper limit | The upper limit of conservation level `(N,10]`. | `(9,10]` in default. |
-| -N | lower limit | The lower limit of conservation level `(0,a)`.| `(0,6]` in default. |
-| -P | palindromic | `TRUE` or `FALSE`, the flag of palindromic of TFBS. | `FALSE` in default. |
-| -M | mirror | `TRUE` or `FALSE`, the flag of mirror of TFBS. | `FALSE` in default. |     
-| -e | enlargement | The times of seed alignments enlargement. A positive integer between `[1,3]`. | `3` in default. |  
-| -b | background | The conserve level `(0,1]` when search in background genome. Only effective when background gene exists. | `0.95` in default.|  
-| -W | sequences weight | `TRUE` or `FALSE`, the flag of considering sequences weight. | `FALSE` in default. |  
-| -A | approximation | `TRUE` or `FALSE`, the flag of approximation of P-value calculation. | `FALSE` in default. |  
-| -G | global | `TRUE` or `FALSE`, the flag of global TF prediction. | `FALSE` in default. |  
-| -C | local | `TRUE` or `FALSE`, the flag of local TF prediction.  | `FALSE` in default. |  
-| -E | expansion | `TRUE` or `FALSE`, the flag of expansion of closures base on the threshold `[0.3,0.8]`. | `FALSE` in default. |  
-| -F | fast | `TRUE` or `FALSE`, the flag of fast version of TESA which just enhance two ends of motifs. | `FALSE` in default. |  
+| -l  | `length` | Specify length of segments during two-stage alignment. In general, this value should be greater than 5. | The program uses `14` in default.|
+| -L  | `minlength` | Specify minimum length of segments during two-stage alignment. This parameter only takes effect when `l` is not specified. | This parameter does not effect beyond default parameters. |
+| -U  | `maxlength` | Specify maximum length of segments during two-stage alignment. Must have a value greater than `L`. This parameter only takes effect when `l` is not specified. | This parameter does not effect beyond default parameters. |
+| -R | `range` | The range when we use `[L,U]`. | The program uses `1` in default. |  
+| -o | `output closures` | Number of closures to report (used under a specific input length). Only effective when the value is greater than the total number of closures found by this tool. | The program reports `10` closures in default. |
+| -n  | `number of closures` | Top `n` closures under each length are used when `L < U`. Only effective when the value is greater than the total number of closures found by this tool. | This parameter does not effect beyond default parameters. |
+| -B  | `reverse complement` | `TRUE` or `FALSE` whether to search reverse complement. If it is set `TRUE`，the program will search both the forward complement and reverse complement. | This flag is set as `TRUE` in default which means input sequence should be bidirectional. |
+| -w | `weight` | Should be set with a positive integer. The weight of the two motif ends. | The program uses default weight `2`. |
+| -k | `motif seed size` | Should be set with a positive integer. The minimum size of the initial motif seeds. | It is strongly recommended not to set it smaller than the default value `3`. |
+| -c | `consistency ratio` | The consistency level of the motif seeds. Should be set between `(0.5-1.0]`. | The program uses ratio `1` in default. It must be strictly greater than `0.5`. |
+| -s | `simulation times` | The number of simulation times when generating motif closures. A positive integer greater than or equal to `5`.| Increasing this parameter will increase the run time. The program uses `5` in default. |
+| -u | `similarity score` | The threshold of two closures' similarity score `(0,1]`.| Default threshold is set as `0.95`. |
+| -a | `upper limit` | The upper limit of conservation level `(N,10]`. | The program uses `9` in default. |
+| -N | `lower limit` | The lower limit of conservation level `(0,a)`.| Lower limit is set as `6` in default. |
+| -P | `palindromic` | `TRUE` or `FALSE`, the flag of palindromic of TFBS. | The flag of palindromic is `FALSE` in default. |
+| -M | `mirror` | `TRUE` or `FALSE`, the flag of mirror of TFBS. | The flag of mirror of TFBS is `FALSE` in default. |     
+| -e | `enlargement` | The times of seed alignments enlargement. A positive integer between `[1,3]`. | The program run `3` times for seed alignments enlargement in default. |  
+| -b | `background` | The conserve level `(0,1]` when search in background genome. Only effective when background gene exists. | If background gene exists, the level uses `0.95` in default.|  
+| -W | `sequences weight` | `TRUE` or `FALSE`, the flag of considering sequences weight. | The flag is set as `FALSE` in default. |  
+| -A | `approximation` | `TRUE` or `FALSE`, the flag of approximation of *P*-value calculation. | `FALSE` in default. |  
+| -G | `global` | `TRUE` or `FALSE`, the flag of global TF prediction. | Global TF prediction flag is `FALSE` in default. |  
+| -C | `local` | `TRUE` or `FALSE`, the flag of local TF prediction.  | Local TF prediction flag is `FALSE` in default. |  
+| -E | `expansion` | `TRUE` or `FALSE`, the flag of expansion of closures base on the threshold `[0.3,0.8]`. | No expansion of closures with `FALSE` in default. |  
+| -F | `fast` | `TRUE` or `FALSE`, the flag of fast version of TESA which just enhance two ends of motifs. | In default, it is set as `FALSE` which means runs a full version. |  
 
      
 ## Contact
 
 Any questions, problems, bugs are welcome and should be dumped to
-Cankun Wang <cankun.wang@osumc.edu>
+Cankun Wang <cankun.wang@osumc.edu>.
 
