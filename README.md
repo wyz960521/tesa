@@ -70,8 +70,10 @@ L and U are low boundary and up boundary of scope of length of potential motifs 
 
 You can run TESA with another option using base coverage signal according to the following instructions:
  
-1. Make sure both ```Bedtools``` and ```BigWigMerge``` are ready. These tools can be found：
+1. Make sure both ```Bedtools``` and ```BigWigMerge``` are ready. 
+   
    Bedtools: https://bedtools.readthedocs.io/en/latest
+   
    BigWigMerge: https://anaconda.org/bioconda/ucsc-bigwigmerge
 3. A peak file with BED format(for instance, [PREFIX].bed), two bigwig files named [PREFIX]_Forward.bw and [PREFIX]_Reverse.bw respectively and a reference file with FASTA format with its reference with FAI format are required. For instance, there is a toy run with test.bed, test_Forward.bw, test_Reverse.bw, sequence.fa and sequence.fa.fai as input. Additionally, you can generate reference using samtools.
 4. Run preprocessing script and generate output file *.tesa.
