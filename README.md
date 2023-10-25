@@ -21,7 +21,7 @@ TESA constructs a matrix with dimensions 2𝑚 × 𝑛, where 𝑚 is the number
 
 After the two-stage alignment, TESA constructs a graph 𝐺 using the top-scoring positions from the alignment. The graph incorporates both the input sequences and their reverse complements, with each position connected by an edge.
 
-### 3. Motif setection
+### 3. Motif selection
 
 Cliques (complete subgraphs) are detected within the constructed graph using a heuristic algorithm. These cliques serve as potential motifs.
 
