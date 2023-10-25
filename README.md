@@ -35,7 +35,7 @@ In the final step, TESA expands the sets of motif instances identified in Step 4
 
 ## Sequence set
 
-The sequence set refers to the collection of DNA sequences that are used as input data for motif discovery algorithms. The sequence set is specifically derived from ChIP-exo data. The ChIP-exo data includes the reference genome file in `FASTA` format, a narrow peak file in BED format, and one or multiple sequencing coverage files in `bigWig` format. These files are processed and transformed into the TESA format, which combines the narrow peaks represented in `FASTA` format with normalized sequencing coverages. This sequence set is then used as input for the TESA algorithm to identify DNA binding motifs.
+The sequence set refers to the collection of DNA sequences that are used as input data for motif discovery algorithms. The sequence set is specifically derived from ChIP-exo data. The ChIP-exo data includes the reference genome file in `FASTA` format, a narrow peak file in BED format, and one or multiple sequencing coverage files in `bigWig` format. These files are processed and transformed into the `TESA` format, which combines the narrow peaks represented in `FASTA` format with normalized sequencing coverages. This sequence set is then used as input for the TESA algorithm to identify DNA binding motifs.
 
 ## Installation
 
