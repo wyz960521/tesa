@@ -98,10 +98,10 @@ $ ./tesa [OUTPUT_PREFIX].tesa
 
 | Option  | Parameter | Description | Default |
 | ------------- | ------------- | ------------- | ------------- |
-| -l  | `length` | Specify length of segments during two-stage alignment. In general, this value should be greater than 5. | The program uses `14` in default.|
+| -l  | `length` | Specify length of segments during two-stage alignment. In general, this value should be greater than 5. | The program uses length `14` in default.|
 | -L  | `minlength` | Specify minimum length of segments during two-stage alignment. This parameter only takes effect when `l` is not specified. | This parameter does not effect beyond default parameters. |
 | -U  | `maxlength` | Specify maximum length of segments during two-stage alignment. Must have a value greater than `L`. This parameter only takes effect when `l` is not specified. | This parameter does not effect beyond default parameters. |
-| -R | `range` | The range when we use `[L,U]`. | The program uses `1` in default. |  
+| -R | `range` | The range when we use `[L,U]`. | The default range is `1`. |  
 | -o | `output closures` | Number of closures to report (used under a specific input length). Only effective when the value is greater than the total number of closures found by this tool. | The program reports `10` closures in default. |
 | -n  | `number of closures` | Top `n` closures under each length are used when `L < U`. Only effective when the value is greater than the total number of closures found by this tool. | This parameter does not effect beyond default parameters. |
 | -B  | `reverse complement` | `TRUE` or `FALSE` whether to search reverse complement. If it is set `TRUE`，the program will search both the forward complement and reverse complement. | This flag is set as `TRUE` in default which means input sequence should be bidirectional. |
