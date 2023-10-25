@@ -116,7 +116,7 @@ $ ./tesa [OUTPUT_PREFIX].tesa
 | -A | approximation | `TRUE` or `FALSE`, the flag of approximation of P-value calculation. | `FALSE` in default. |  
 | -G | global | `TRUE` or `FALSE`, the flag of global TF prediction. | `FALSE` in default. |  
 | -C | local | `TRUE` or `FALSE`, the flag of local TF prediction.  | `FALSE` in default. |  
-| -E | expansion | `TRUE` or `FALSE`, the flag of expansion of closures base on the threshold `0.3-0.8`. | `FALSE` in default. |  
+| -E | expansion | `TRUE` or `FALSE`, the flag of expansion of closures base on the threshold `[0.3,0.8]`. | `FALSE` in default. |  
 | -F | fast | `TRUE` or `FALSE`, the flag of fast version of TESA which just enhance two ends of motifs. | `FALSE` in default. |  
 
      
