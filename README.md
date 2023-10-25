@@ -4,14 +4,14 @@
 
 We introduce the TESA algorithm, which is a novel motif discovery algorithm designed for ChIP-exo data. ChIP-exo is a high-resolution DNA sequencing technique that improves the accuracy and precision of motif discovery compared to traditional ChIP-seq methods. TESA utilizes a weighted two-stage alignment procedure that takes into account positional sequencing coverage to allocate weights to sequence positions. This allows for the accurate localization of TF-DNA interaction sites and the assessment of closely located or overlapping binding occurrences. Experimental results demonstrate that TESA outperforms other motif discovery algorithms in terms of precision and the reconstruction of Position Weight Matrices (PWM) when applied to both prokaryotic and eukaryotic ChIP-exo datasets. The availability of the TESA source code and benchmark datasets further enhances its potential as a valuable tool in genomic research.
 
-Overall, we highlight the significance of TESA in improving motif discovery accuracy and precision by leveraging the higher resolution and precise localization offered by ChIP-exo data. The algorithm's weighted two-stage alignment procedure and incorporation of a "bookend" model contribute to its superior performance in identifying DNA binding patterns. The comparisons with other motif discovery algorithms and the availability of benchmark datasets further validate the effectiveness of TESA in genomic research.
+Overall, we highlight the significance of TESA in improving motif discovery accuracy and precision by leveraging the higher resolution and precise localization offered by ChIP-exo data. The algorithm's weighted two-stage alignment procedure and incorporation of a 'bookend' model contribute to its superior performance in identifying DNA binding patterns. The comparisons with other motif discovery algorithms and the availability of benchmark datasets further validate the effectiveness of TESA in genomic research.
 
 ![image](overview.png)
 
 
 ## How TESA works
 
-TESA incorporates a weighted two-stage alignment procedure and a "bookend" model to accurately identify DNA binding patterns. The algorithm consists of the following steps:
+TESA incorporates a weighted two-stage alignment procedure and a 'bookend' model to accurately identify DNA binding patterns. The algorithm consists of the following steps:
 
 ### 1. Two-stage alignment
 
@@ -25,9 +25,9 @@ After the two-stage alignment, TESA constructs a graph 𝐺 using the top-scorin
 
 Cliques (complete subgraphs) are detected within the constructed graph using a heuristic algorithm. These cliques serve as potential motifs.
 
-### 4. "Bookend" model
+### 4. 'Bookend' model
 
-A specialized "bookend" method is deployed to optimize the length of the motifs by assessing the sequential overlaps between pairs of potential motifs.
+A specialized 'bookend' method is deployed to optimize the length of the motifs by assessing the sequential overlaps between pairs of potential motifs.
 
 ### 5. Expansion of motif instances
 
@@ -39,11 +39,11 @@ The sequence set refers to the collection of DNA sequences that are used as inpu
 
 ## Installation
 
-Enter the folder "tesa" and type "make" then the compiled codes are within the same directory as the source.
+Enter the folder 'tesa' and type 'make' then the compiled codes are within the same directory as the source.
 
 ## Inputs and outputs
 
-The major program in the provided package is `tesa`. It is capable of parsing standard fasta format files, allowing sequences with different lengths. Example files are provided for reference.
+The major program in the provided package is `tesa`. It is capable of parsing standard FASTA format files, allowing sequences with different lengths. Example files are provided for reference.
 
 To access help and view all available options.
 
@@ -51,7 +51,7 @@ To access help and view all available options.
 $ ./tesa -h (./tesa)
 ```
 
-Take a look at `example` (fasta file) first. Then, you can run tesa with a specific length parameter `l`, where the program will handle segments of that length or greater during the two-stage alignment process to identify potential motifs. For example, you can run the following command to specify segments with length exactly 14.
+Take a look at `example` (FASTA file) first. Then, you can run tesa with a specific length parameter `l`, where the program will handle segments of that length or greater during the two-stage alignment process to identify potential motifs. For example, you can run the following command to specify segments with length exactly 14.
 
 ```console
 $ ./tesa -i example -l 14
