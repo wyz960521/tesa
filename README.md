@@ -81,6 +81,7 @@ You can run TESA with another option using sequencing coverage according to the 
    `SAMTools`: https://github.com/samtools/samtools
 
 3. Run preprocessing script and generate output file `*.tesa`.
+
 ```console
 $ chmod +x preprocess.sh
 $ ./preprocess.sh [PEAK_PREFIX] [REFERENCE_FILE] [REFERENCE_INDEX_FILE] [OUTPUT_PREFIX]
