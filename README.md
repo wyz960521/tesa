@@ -35,7 +35,7 @@ In the final step, TESA expands the sets of motif instances identified in Step 4
 
 ## Sequence set
 
-The sequence set refers to the collection of DNA sequences that are used as input data for motif discovery algorithms. The sequence set is specifically derived from ChIP-exo data. The ChIP-exo data includes the reference genome file in FASTA format, a narrow peak file in BED format, and one or multiple sequencing coverage files in BigWig format. These files are processed and transformed into the TESA format, which combines the narrow peaks represented in FASTA format with normalized sequencing coverages. This sequence set is then used as input for the TESA algorithm to identify DNA binding motifs.
+The sequence set refers to the collection of DNA sequences that are used as input data for motif discovery algorithms. The sequence set is specifically derived from ChIP-exo data. The ChIP-exo data includes the reference genome file in `FASTA` format, a narrow peak file in BED format, and one or multiple sequencing coverage files in BigWig format. These files are processed and transformed into the TESA format, which combines the narrow peaks represented in `FASTA` format with normalized sequencing coverages. This sequence set is then used as input for the TESA algorithm to identify DNA binding motifs.
 
 ## Installation
 
@@ -43,7 +43,7 @@ Enter the folder `tesa` and type `make` then the compiled codes are within the s
 
 ## Inputs and outputs
 
-The major program in the provided package is `tesa`. It is capable of parsing standard FASTA format files, allowing sequences with different lengths. Example files are provided for reference.
+The major program in the provided package is `tesa`. It is capable of parsing standard `FASTA` format files, allowing sequences with different lengths. Example files are provided for reference.
 
 To access help and view all available options.
 
@@ -51,7 +51,7 @@ To access help and view all available options.
 $ ./tesa -h (./tesa)
 ```
 
-Take a look at `example` (FASTA file) first. Then, you can run `tesa` with a specific length parameter `l`, where the program will handle segments of that length or greater during the two-stage alignment process to identify potential motifs. For example, you can run the following command to specify segments with length exactly 14.
+Take a look at `example` (`FASTA` file) first. Then, you can run `tesa` with a specific length parameter `l`, where the program will handle segments of that length or greater during the two-stage alignment process to identify potential motifs. For example, you can run the following command to specify segments with length exactly 14.
 
 ```console
 $ ./tesa -i example -l 14
