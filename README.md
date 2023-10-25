@@ -99,8 +99,8 @@ $ ./tesa [OUTPUT_PREFIX].tesa
 | Option  | Parameter | Description | Default |
 | ------------- | ------------- | ------------- | ------------- |
 | -l  | length of segments [5,l] | Specify length of segments during two-stage alignment. In general, this value should be greater than 5. | `14` in default.|
-| -L  | lower length of segments [L,U] | Specify minimum length of segments during two-stage alignment. This parameter only takes effect when `l` is not specified. | Not effective. |
-| -U  | upper length of segments [L,U] | Specify maximum length of segments during two-stage alignment. Must have a value greater than `L`. This parameter only takes effect when `l` is not specified. | Not effective. |
+| -L  | lower length | Specify minimum length of segments during two-stage alignment. This parameter only takes effect when `l` is not specified. | Not effective. |
+| -U  | upper length | Specify maximum length of segments during two-stage alignment. Must have a value greater than `L`. This parameter only takes effect when `l` is not specified. | Not effective. |
 | -R | range | The range when we use `[L,U]`. | `1` in default. |  
 | -o | number of closures  | Number of closures to report (used under a specific input length). Only effective when the value is greater than the total number of closures found by this tool. | Report `10` closures in default. |
 | -n  | number of closures  | Top `n` closures under each length are used when `L < U`. Only effective when the value is greater than the total number of closures found by this tool. | Not effective. |
