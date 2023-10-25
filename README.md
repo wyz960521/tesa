@@ -50,7 +50,7 @@ To see help and look at all available options.
 $ ./tesa -h (./tesa)
 ```
 
-Take a look at `example` (fasta file) first. And try to run tesa under a specific length, now we can handle length of segments during two-stage alignment (potential motifs) more than or equal to 5 (controlled in write_block.c line 256).
+Take a look at `example` (fasta file) first. Then try to run tesa under a specific length, now we can handle length of segments during two-stage alignment (potential motifs) more than or equal to 5 (controlled in write_block.c line 256).
 
 ```console
 $ ./tesa -i example -l 14
