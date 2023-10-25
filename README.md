@@ -102,7 +102,7 @@ $ ./tesa [OUTPUT_PREFIX].tesa
 | -L  | lower length | Specify minimum length of segments during two-stage alignment. This parameter only takes effect when `l` is not specified. | Not effective. |
 | -U  | upper length | Specify maximum length of segments during two-stage alignment. Must have a value greater than `L`. This parameter only takes effect when `l` is not specified. | Not effective. |
 | -R | range | The range when we use `[L,U]`. | `1` in default. |  
-| -o | number of closures  | Number of closures to report (used under a specific input length). Only effective when the value is greater than the total number of closures found by this tool. | Report `10` closures in default. |
+| -o | output closures  | Number of closures to report (used under a specific input length). Only effective when the value is greater than the total number of closures found by this tool. | Report `10` closures in default. |
 | -n  | number of closures  | Top `n` closures under each length are used when `L < U`. Only effective when the value is greater than the total number of closures found by this tool. | Not effective. |
 | -B  |  reverse complement | `TRUE` or `FALSE` whether to search reverse complement. If it is set `TRUE`，the program will search both the forward complement and reverse complement. | `TRUE` in default which means input sequence should be bidirectional. |
 | -w | weight | Should be set with a positive integer. The weight of the two motif ends. | The default weight is `2`. |
