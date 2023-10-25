@@ -12,9 +12,9 @@ Overall, we highlight the significance of TESA in improving motif discovery accu
 
 TESA incorporates a weighted two-stage alignment procedure and a "bookend" model to accurately identify DNA binding patterns. The algorithm consists of the following steps:
 
-### 1. Two-Stage Alignment. 
+### 1. Two-Stage Alignment
 
-TESA constructs a matrix 𝑀ℎ of dimensions 2𝑚 × 𝑛, where 𝑚 is the number of input sequences and 𝑛 is the length of each sequence. The matrix represents both the input sequences and their reverse complementary sequences. Each position in the matrix is assigned a normalized sequencing coverage. TESA allocates weights to pairs of segments, each of length 𝑙, between different sequences based on string similarity and sequencing coverage. The statistical significance of string similarity between segments is evaluated using the binomial distribution.
+TESA constructs a matrix 𝑀 of dimensions 2𝑚 × 𝑛, where 𝑚 is the number of input sequences and 𝑛 is the length of each sequence. The matrix represents both the input sequences and their reverse complementary sequences. Each position in the matrix is assigned a normalized sequencing coverage. TESA allocates weights to pairs of segments, each of length 𝑙, between different sequences based on string similarity and sequencing coverage. The statistical significance of string similarity between segments is evaluated using the binomial distribution.
 
 ### 2. Graph Construction
 
@@ -41,14 +41,6 @@ The sequence set refers to the collection of DNA sequences that are used as inpu
 The statistical significance of motifs is assessed through a binomial distribution model. After identifying potential motifs using clique detection, TESA evaluates the co-occurrence of pairs of potential motifs using a binomial distribution test. This test calculates the probability that a pair of randomly selected instances from two potential motifs are within a certain distance. If the observed co-occurrence is deemed statistically significant (p-value < 0.05), TESA combines the potential motifs while maintaining their intersecting instances. This statistical significance assessment allows TESA to determine which potential motifs should be merged to form longer motifs or treated as distinct entities.
 
 The motif statistical significance analysis ensures that TESA accurately identifies motifs that are statistically enriched and distinguishes them from random occurrences. By employing the binomial distribution model, TESA provides a rigorous assessment of motif co-occurrence and optimizes the selection and combination of potential motifs to improve motif prediction accuracy. This statistical approach enhances the reliability and validity of motif discovery results in ChIP-exo data analysis.
-
-## Usage
-
-This software provides a tool capable of accurately extracting cis-regulatory motifs with their correct lengths even in thousands of promoters from a whole prokaryotic genome. For a fasta file containing promoters, the program outputs a number of profiles, with increasing order of their pvalue, containing the binding sites of specific motifs.
-
-Certain parts of the code uses open-source data structure library codes, including:
-- fib <http://resnet.uoregon.edu/~gurney_j/jmpc/fib.html>, copyright information in fib.c
-- Mark A. Weiss's data structure codes <http://www.cs.fiu.edu/~weiss/>
 
 ## Installation
 
